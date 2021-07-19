@@ -27,13 +27,49 @@ public class UserResource {
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
-    @GetMapping("/find/{id}")
+    @GetMapping("/findById/{id}")
     public ResponseEntity<User> getUserById(@PathVariable("id") Long id) {
         try {
             User user = userService.findUserById(id);
             return new ResponseEntity<>(user, HttpStatus.OK);
         } catch (UserException ue) {
             ue = new UserException("User by Id " + id + " was not found!");
+            System.out.println(ue.getMessage());
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/findByPincode/{pincode}")
+    public ResponseEntity<List<User>> getUsersByPincode(@PathVariable("pincode") int pincode) {
+        try {
+            List<User> users = userService.findUsersByPincode(pincode);
+            return new ResponseEntity<>(users, HttpStatus.OK);
+        } catch (UserException ue) {
+            ue = new UserException("User by pincode: " + pincode + " was not found!");
+            System.out.println(ue.getMessage());
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/findByFirstName/{firstName}")
+    public ResponseEntity<List<User>> getUsersByFirstName(@PathVariable("firstName") String firstName) {
+        try {
+            List<User> users = userService.findUsersByFirstName(firstName);
+            return new ResponseEntity<>(users, HttpStatus.OK);
+        } catch (UserException ue) {
+            ue = new UserException("User by firstname: " + firstName + " was not found!");
+            System.out.println(ue.getMessage());
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/findByLastName/{lastName}")
+    public ResponseEntity<List<User>> getUsersByLastName(@PathVariable("lastName") String lastName) {
+        try {
+            List<User> users = userService.findUsersByLastName(lastName);
+            return new ResponseEntity<>(users, HttpStatus.OK);
+        } catch (UserException ue) {
+            ue = new UserException("User by lastname: " + lastName + " was not found!");
             System.out.println(ue.getMessage());
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

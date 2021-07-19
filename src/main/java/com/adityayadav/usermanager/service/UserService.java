@@ -34,6 +34,18 @@ public class UserService {
         return userRepository.findById(id).orElseThrow(() -> new UserException("User by Id " + id + " was not found!"));
     }
 
+    public List<User> findUsersByFirstName(String firstName) {
+        return userRepository.findAllByFirstName(firstName).orElseThrow(() -> new UserException("User by firstname: " + firstName + " was not found!"));
+    }
+
+    public List<User> findUsersByLastName(String lastName) {
+        return userRepository.findAllByLastName(lastName).orElseThrow(() -> new UserException("User by lastname: " + lastName + " was not found!"));
+    }
+
+    public List<User> findUsersByPincode(int pincode) {
+        return userRepository.findAllByPincode(pincode).orElseThrow(() -> new UserException("User by pincode: " + pincode + " was not found!"));
+    }
+
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
     }

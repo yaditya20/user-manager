@@ -13,6 +13,12 @@ public interface UserRepository extends PagingAndSortingRepository<User, Long> {
 
     Optional<User> findById(Long id);
 
+    Optional<List<User>> findAllByFirstName(String firstName);
+
+    Optional<List<User>> findAllByLastName(String lastName);
+
+    Optional<List<User>> findAllByPincode(int pincode);
+
     List<User> findByOrderByDob(Sort sort);
 
     List<User> findByOrderByDoj(Sort sort);
